@@ -42,7 +42,7 @@ function makeEventNum(id){
             curNum="";
         }
         curNum+=button.innerHTML
-        inputScreen.textContent=curNum;
+        screen.textContent=curNum;
     });
 }
 
@@ -51,9 +51,9 @@ function makeEventOp(id){
     const button=document.getElementById(id);
     button.addEventListener("click",(e)=>{
         equalCheck=false;
-        inputScreen.textContent=button.innerHTML;
+        screen.textContent=button.innerHTML;// change to highlight button
         numbers.push(curNum);
-
+        
         if (numbers.length==2){
             numbers=[showResults(curOp)];                 
         }
@@ -73,8 +73,16 @@ function showResults(op){
             results=results.toFixed(2);
             }
     }
-    resultScreen.textContent=results;
+    screen.textContent=results;
     return results;
+}
+
+function clearFunc(){
+    curNum="";
+    curOp=""
+    numbers=[];
+    equalCheck=false;
+    screen.textContent="";
 }
 
 let button;
@@ -86,9 +94,8 @@ let curOp="";
 let numbers=[];
 let equalCheck=false;
 
-const inputScreen = document.querySelector("#input");
+const screen = document.querySelector("#screen");
 
-const resultScreen = document.querySelector("#result");
 
 for (let i=0; i<10;i++){ //add event listener for number buttons
     makeEventNum(i);
@@ -112,6 +119,6 @@ equal.addEventListener("click",(e)=>{   //operate on the numbers on screen when 
 
 const clear=document.getElementById("C");
 clear.addEventListener("click",(e)=>{
-    display="";
-    inputScreen.textContent=display;
+    clearFunc();
+    
 });
