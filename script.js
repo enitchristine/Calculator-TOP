@@ -40,6 +40,7 @@ function makeEventNum(id){
     button.addEventListener("click",(e)=>{
         if (equalCheck){
             curNum="";
+            equalCheck=false;
         }
         curNum+=button.innerHTML
         screen.textContent=curNum;
