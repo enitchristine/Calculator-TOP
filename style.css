@@ -15,6 +15,18 @@
     border: solid;
     border-width: 5px;
     border-color: aquamarine;
+    display: flex;
+    
+}
+
+#input{
+    height:100px;
+    width: 70%;
+}
+
+#result{
+    height:100px;
+    width: 30%;
 }
 
 #buttons{
@@ -34,17 +46,10 @@
     border-color: aquamarine;
     background-color: lightblue;
     text-align: center;
-}
-
-.number{
     width:100px;
     height:100px;
 }
 
-.op{
-    width:100px;
-    height:100px;
-}
 
 
 
