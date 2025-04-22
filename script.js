@@ -33,78 +33,82 @@ function operate(num1,num2, operator){
             }
             return divide(num1,num2);
     }
-
 }
 
-function makeEvent(id){
+function makeEventNum(id){
     const button=document.getElementById(id);
-    console.log(button.innerHTML);
     button.addEventListener("click",(e)=>{
-        console.log("clicked");
-        if (resultCheck){ //checks if = was pressed just before, clear
-            display="";
-            resultCheck=false;
-        }; 
-        display+=button.innerHTML;
-        inputScreen.textContent=display;
+        if (equalCheck){
+            curNum="";
+        }
+        curNum+=button.innerHTML
+        inputScreen.textContent=curNum;
     });
+}
+
+function makeEventOp(id){
+    // when pressed an op: push number in curNum
+    const button=document.getElementById(id);
+    button.addEventListener("click",(e)=>{
+        equalCheck=false;
+        inputScreen.textContent=button.innerHTML;
+        numbers.push(curNum);
+
+        if (numbers.length==2){
+            numbers=[showResults(curOp)];                 
+        }
+        curOp=button.innerHTML;
+        curNum="";
+    }
+)
+}
+
+function showResults(op){
+    let results;
+    if (op==""){
+        results = numbers[0];
+    }else{
+        results=operate(numbers[0],numbers[1],op);
+        if (results%1>0){   //if results has decimals
+            results=results.toFixed(2);
+            }
+    }
+    resultScreen.textContent=results;
+    return results;
 }
 
 let button;
 let others=["+","-","x",":","."];
 let operators=["+","-","x",":"];
-let resultCheck = false;
+
+let curNum="";
+let curOp="";
+let numbers=[];
+let equalCheck=false;
+
 const inputScreen = document.querySelector("#input");
-let display="";
+
 const resultScreen = document.querySelector("#result");
 
 for (let i=0; i<10;i++){ //add event listener for number buttons
-    makeEvent(i);
+    makeEventNum(i);
 }
 
 for (icon in others){ //add event listener for other buttons
-    makeEvent(others[icon]);
+    makeEventOp(others[icon]);
 }
 
 const equal=document.getElementById("=");
+
 equal.addEventListener("click",(e)=>{   //operate on the numbers on screen when "=" is clicked
-
-    let numbers=display.split(/[x:+-]/); //get 
-    numbers=numbers.filter((x)=>x!="");
-    let op=display.split(/[1234567890.]/).join("").split("");
-    op=op.filter((x)=>x!="");
-
-    // check if :0
-    let divByZero=false;
-    for (let i=0; i<numbers.length;i++){
-        if (numbers[i]==0 && op[i-1]==":"){
-            divByZero=true;
-            break;
-        }
-    }
-    
-    if (numbers.length<=op.length || divByZero){
-        resultScreen.textContent="ERROR";
-    }else{
-        let i=0;
-        let results=numbers
-            .reduce((a,b)=>{ 
-                let result=operate(a,b,op[i]);
-                i++;
-                return result;
-            }
-        );
-
-        if (results%1>0){   // if results has decimals
-            results=results.toFixed(2);
-        }
-
-        resultScreen.textContent=results;
-        
-    }
-    resultCheck=true;
+    numbers.push(curNum);
+    curNum=showResults(curOp);
+    curOp = "";
+    numbers=[];
+    equalCheck=true;
 }
 )
+
 
 const clear=document.getElementById("C");
 clear.addEventListener("click",(e)=>{
