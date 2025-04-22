@@ -11,10 +11,11 @@
 
 #screen{
     height:100px;
-    width:500px;
+    width:600px;
     border: solid;
     border-width: 5px;
     border-color: darkred;
+    border-radius: 10px;
 
     display: flex;
     align-items: center;
