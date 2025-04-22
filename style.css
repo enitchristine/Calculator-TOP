@@ -1,13 +1,11 @@
 #body{
     display: flex;
     flex-direction: column;
-    /* border: solid;
-    border-width: 5px;
-    border-color: aquamarine; */
     height: 900px;
     width: 900px;
     justify-content: space-around;
     align-items: center;
+    margin: auto;
 
 }
 
@@ -21,15 +19,14 @@
 
 #buttons{
     display:flex;
-    justify-content: center;
-
+    flex-direction: column;
+    align-items: center;
     height: 700px;
     width: 700px;
 
 }
-.columns{
+.column{
     display: flex;
-    flex-direction: column;
 }
 .button{
     border: solid;
@@ -40,13 +37,13 @@
 }
 
 .number{
-    width:175px;
-    height:175px;
+    width:100px;
+    height:100px;
 }
 
 .op{
-    width:140px;
-    height:140px;
+    width:100px;
+    height:100px;
 }
 
 
