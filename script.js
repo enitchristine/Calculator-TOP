@@ -28,6 +28,9 @@ function operate(num1,num2, operator){
         case "x":
             return multiply(num1,num2);
         case ":":
+            if (num1==0 || num2==0){
+                
+            }
             return divide(num1,num2);
     }
 
@@ -71,7 +74,16 @@ equal.addEventListener("click",(e)=>{   //operate on the numbers on screen when 
     let op=display.split(/[1234567890.]/).join("").split("");
     op=op.filter((x)=>x!="");
 
-    if (numbers.length<=op.length){
+    // check if :0
+    let divByZero=false;
+    for (let i=0; i<numbers.length;i++){
+        if (numbers[i]==0 && op[i-1]==":"){
+            divByZero=true;
+            break;
+        }
+    }
+    
+    if (numbers.length<=op.length || divByZero){
         resultScreen.textContent="ERROR";
     }else{
         let i=0;
